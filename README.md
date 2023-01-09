@@ -1,4 +1,4 @@
-# pyportplexed
+# PyPortPlexed
 
 In early development.
 
@@ -13,6 +13,11 @@ back home.
 
 PyPortPlexed very simply creates thread like objects that return results via porting
 to the n, that can be easily and simply placed directly into a variable to ready to
-use.
+use with just three lines of code in a Program that imports PyPortPlexed.
 
-^In just three lines of code in a Program that imports PyPortPlexed.
+Current versions are barebones and would potentially need sanitization depending
+on requirements.
+
+Please also understand thoroughly the implications and infinite use cases of eval()
+before handing and arguments to PyPortPlex, because currently eval() is implemented
+for flexibility while developing. 
