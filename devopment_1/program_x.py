@@ -39,6 +39,6 @@ single thread (python -OO time_equivalent_eval(1024^10000).py):
 my pyportplexed (python -OO program_x.py):
     (8 operations: 1024**500000) 58.40562380000483 seconds (<1 minute)
 
-single thread (python -OO time_equivalent_eval(1024^10000).py):
+single thread (python -OO time_equivalent_eval(1024^50000).py):
     (8 operations: 1024**500000) 361.5826317000028 seconds (6+ minutes)
 """
