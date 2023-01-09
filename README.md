@@ -12,7 +12,7 @@ If you left Python for a while to find threads in another language you may come
 back home.
 
 PyPortPlexed very simply creates thread like objects that return results via porting
-to the n, that can be easily and simply placed directly into a variable to ready to
+to the n, that can be easily and simply placed directly into a variable ready to
 use with just three lines of code in a Program that imports PyPortPlexed.
 
 Current versions are barebones and would potentially need sanitization depending
