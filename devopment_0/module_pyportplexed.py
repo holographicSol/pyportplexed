@@ -15,7 +15,7 @@ def start(port_start, end, results_port):
     commands = []
     ports = []
     for n in range(port_start, port_start+end):
-        cmd = 'python ./module_subio_thread.py ' + str(n) + ' ' + str(results_port)
+        cmd = 'python ./module_pyportplexed_thread.py ' + str(n) + ' ' + str(results_port)
         ports.append(n)
         print('starting process:', cmd)
         commands.append(cmd)
