@@ -15,4 +15,4 @@ PyPortPlexed very simply creates thread like objects that return results via por
 to the n, that can be easily and simply placed directly into a variable to ready to
 use.
 
-In just three lines of code in a Program that imports PyPortPlexed.
+^In just three lines of code in a Program that imports PyPortPlexed.
