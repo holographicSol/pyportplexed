@@ -94,6 +94,9 @@ def simple_example_3():
     print('Time taken:', time.perf_counter() - t0)
     print('Items in results:', len(results))
 
+    """ Destroy the daemonic process(s) when done """
+    pyportplexed.destroy_daemons(connections)
+
 
 # uncomment to test
 simple_example_1()
