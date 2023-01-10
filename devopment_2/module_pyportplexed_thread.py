@@ -11,6 +11,7 @@ port_1 = int(sys.argv[2])
 buffer_size = int(sys.argv[3])
 
 s = socket.socket()
+host_ip = s.getsockname()[0]
 host = socket.gethostname()
 s.bind((host, port))
 s.listen(3)
@@ -18,15 +19,16 @@ s.listen(3)
 """ Accept incoming connection """
 c, addr = s.accept()
 
-""" Decode the incoming message """
-con_rcv = bytes(c.recv(buffer_size)).decode('utf8')
+""" Allow receive if incoming addr[0] (IP) == socket.getsockname()[0] """
+if host_ip == addr[0]:
+    """ Decode the incoming message """
+    con_rcv = bytes(c.recv(buffer_size)).decode('utf8')
+    """ Do some work, in this example eval() is used statically (test purposes only) CAUTION. """
+    ev = eval(con_rcv)
 
-""" Do some work, in this example eval() is used statically (test purposes only) CAUTION. """
-ev = eval(con_rcv)
-
-""" Send the result back to the main program (note: final operation is as client) """
-s = socket.socket()
-host = socket.gethostname()
-s.connect((host, port_1))
-s.send(bytes(str(ev), encoding='utf-8'))
-s.close()
+    """ Send the result back to the main program (note: final operation is as client) """
+    s = socket.socket()
+    host = socket.gethostname()
+    s.connect((host, port_1))
+    s.send(bytes(str(ev), encoding='utf-8'))
+    s.close()
