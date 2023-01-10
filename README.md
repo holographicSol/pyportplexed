@@ -24,3 +24,5 @@ one who makes the call.
 Any daemons spawned should be almost constantly in use otherwise destroy them if
 you will not be using them for even around a second. Then make more when you need
 them again.
+
+The daemons are networked I/O devices with infiite power thanks and due to eval().
