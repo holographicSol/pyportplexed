@@ -1,5 +1,5 @@
 """ Written by Benjamin Jack Cullen
-Intention: Example program using PyPortPlex.
+Intention: Example program using PyPortPlexed.
 """
 import time
 import pyportplexed
