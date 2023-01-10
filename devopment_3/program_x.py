@@ -14,11 +14,13 @@ n_threads = 8
 print('\nStarting Program X: Using PyPortPlexed to compute...')
 
 """ Start n_threads processes with args """
-threads = th.start(start_port, n_threads, results_port, buffer_size=1024)
+ports = th.start(start_port, n_threads, results_port, buffer_size=1024)
 
 """ Connect to n_threads processes and give them a workload """
 t0 = time.perf_counter()
-connections = th.connect(threads)
+connections = th.connect(ports)
+
+""" Send something for PyPortPlexed to compute """
 th.send(connections, '1024**100000')
 
 """ Wait for the results to come in from n_threads ports """
