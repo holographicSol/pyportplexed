@@ -18,7 +18,8 @@ threads = th.start(start_port, n_threads, results_port, buffer_size=1024)
 
 """ Connect to n_threads processes and give them a workload """
 t0 = time.perf_counter()
-connections = th.connect(threads, '1024**100000')
+connections = th.connect(threads)
+th.send(connections, '1024**100000')
 
 """ Wait for the results to come in from n_threads ports """
 results = th.results(results_port, n_threads, buffer_size=1024)

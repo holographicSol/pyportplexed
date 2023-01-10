@@ -24,14 +24,13 @@ def start(port_start, end, results_port, buffer_size=1024):
     return ports
 
 
-def connect(ports, data):
+def connect(ports):
     """ Initiate socket(s) and connect socket(s) to thread(s) (subprocess(s)) """
     socks = []
     for port in ports:
         s = socket.socket()
         host = socket.gethostname()
         s.connect((host, port))
-        s.send(bytes(data, encoding='utf-8'))
         socks.append(s)
     return socks
 
