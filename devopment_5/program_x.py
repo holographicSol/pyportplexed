@@ -16,7 +16,7 @@ def simple_example_0():
     """ 1. spawn daemonic processes with args """
     ports = pyportplexed.spawn(spawn_port, n_threads, consequences_port, buffer_size=1024)
 
-    """ 2. commune to daemonic processes """
+    """ 2. commune with daemonic processes """
     communions = pyportplexed.commune(ports)
 
     data = ['10**1', '10**2', '10**3', '10**4']
@@ -45,7 +45,7 @@ def simple_example_1():
     """ 1. spawn daemonic processes with args """
     ports = pyportplexed.spawn(spawn_port, n_threads, consequences_port, buffer_size=1024)
 
-    """ 2. commune to daemonic processes """
+    """ 2. commune with daemonic processes """
     communions = pyportplexed.commune(ports)
 
     data = ['1024**100000', '1024**100000', '1024**100000', '1024**100000',
@@ -74,7 +74,7 @@ def simple_example_2():
     """ 1. spawn daemonic processes with args """
     ports = pyportplexed.spawn(spawn_port, n_threads, consequences_port, buffer_size=1024)
 
-    """ 2. commune to daemonic processes """
+    """ 2. commune with daemonic processes """
     communions = pyportplexed.commune(ports)
 
     data = ['1024**100000', '1024**100000', '1024**100000', '1024**100000',
@@ -109,7 +109,7 @@ def simple_example_3():
     """ 1. spawn daemonic processes with args """
     ports = pyportplexed.spawn(spawn_port, n_threads, consequences_port, buffer_size=1024)
 
-    """ 2. commune to daemonic processes """
+    """ 2. commune with daemonic processes """
     communions = pyportplexed.commune(ports)
 
     data = ['subprocess.getoutput("powershell ping 8.8.8.8")',
