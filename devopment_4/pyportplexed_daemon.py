@@ -17,7 +17,6 @@ s = socket.socket()
 host = socket.gethostname()
 s.bind((host, port))
 s.listen()
-host_ip = s.getsockname()[0]
 
 """ Create a reusable I/O device in software that communicates over ports """
 c = None
@@ -29,6 +28,7 @@ while con_rcv != 'terminate':
         """ Accept incoming connection """
         c, addr = s.accept()
     else:
+        host_ip = s.getsockname()[0]
 
         """ Allow receive if incoming addr[0] (IP) == socket.getsockname()[0] """
         if host_ip == addr[0]:
