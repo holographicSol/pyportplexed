@@ -20,7 +20,7 @@ ports = th.start(start_port, n_threads, results_port, buffer_size=1024)
 t0 = time.perf_counter()
 connections = th.connect(ports)
 
-""" 3. Send something for PyPortPlexed (daemonic processes) to compute """
+""" 3. Send something for PyPortPlexed to compute """
 data = ['1024**100000', '1024**100000', '1024**100000', '1024**100000',
         '1024**100000', '1024**100000', '1024**100000', '1024**100000']
 th.send(connections, data=data)
