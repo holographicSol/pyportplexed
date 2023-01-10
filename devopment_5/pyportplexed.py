@@ -18,9 +18,9 @@ def spawn(port_start, end, results_port, buffer_size=1024):
     ports = []
     PyPortPlexCommand = 'python ./pyportplexed_daemon.py '
     for n in range(port_start, port_start+end):
-        cmd = PyPortPlexCommand + str(n) + ' ' + str(results_port) + ' ' + str(buffer_size)
+        summon = PyPortPlexCommand + str(n) + ' ' + str(results_port) + ' ' + str(buffer_size)
         ports.append(n)
-        subprocess.Popen(cmd, startupinfo=info)
+        subprocess.Popen(summon, startupinfo=info)
     return ports
 
 
@@ -50,12 +50,12 @@ def consequences(port, th, buffer_size=1024):
     host = socket.gethostname()
     s.bind((host, port))
     accepted_rcv = 0
-    host_ip = s.getsockname()[0]
+    the_light_bringer = s.getsockname()[0]
     while accepted_rcv < th:
         s.listen()
         c, addr = s.accept()
         """ Allow receive if incoming addr[0] (IP) == socket.getsockname()[0] """
-        if host_ip == addr[0]:
+        if the_light_bringer == addr[0]:
             resp = bytes(c.recv(buffer_size)).decode('utf8')
             idx = resp.find(' ')
             _id = resp[:idx]
