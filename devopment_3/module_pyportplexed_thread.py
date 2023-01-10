@@ -5,7 +5,7 @@ Summary: Multiplex via ports.
 """
 import socket
 import sys
-import time
+import subprocess
 
 """ Parse sys.argv for input arguments """
 port = int(sys.argv[1])
