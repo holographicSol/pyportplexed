@@ -17,3 +17,10 @@ with caution.
 
 Please understand thoroughly the implications and infinite use cases of eval()
 before handing arguments to PyPortPlexed.
+
+When daemons are spawned ensure the very next thing you do is call them. Be the
+one who makes the call.
+
+Any daemons spawned should be almost constantly in use otherwise destroy them if
+you will not be using them for even around a second. Then make more when you need
+them again.
