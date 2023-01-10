@@ -16,7 +16,7 @@ buffer_size = int(sys.argv[3])
 s = socket.socket()
 host = socket.gethostname()
 s.bind((host, port))
-s.listen(3)
+s.listen()
 host_ip = s.getsockname()[0]
 
 """ Create a reusable I/O device in software that communicates over ports """
