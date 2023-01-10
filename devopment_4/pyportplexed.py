@@ -43,14 +43,6 @@ def send(connections, data):
         i += 1
 
 
-def destroy_daemons(connections):
-    """ Destroy the daemonic process(s) """
-    data = []
-    for connection in connections:
-        data.append('terminate')
-    send(connections, data)
-
-
 def results(port, th, buffer_size=1024):
     """ Receive the result(s) back from the thread(s) (subprocess(s)) """
     multiplexed_results = []
@@ -68,3 +60,11 @@ def results(port, th, buffer_size=1024):
             accepted_rcv += 1
     s.close()
     return multiplexed_results
+
+
+def destroy_daemons(connections):
+    """ Destroy the daemonic process(s) """
+    data = []
+    for connection in connections:
+        data.append('terminate')
+    send(connections, data)
