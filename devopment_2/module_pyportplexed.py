@@ -47,7 +47,7 @@ def results(port, th, buffer_size=1024):
     while accepted_rcv < th:
         s.listen()
         c, addr = s.accept()
-        """ Allow receive if incoming addr[0] (IP) == socket.gethostname() """
+        """ Allow receive if incoming addr[0] (IP) == socket.getsockname()[0] """
         if host_ip == addr[0]:
             multiplexed_results.append(bytes(c.recv(buffer_size)).decode('utf8'))
             accepted_rcv += 1
