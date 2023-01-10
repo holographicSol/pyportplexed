@@ -63,7 +63,7 @@ def results(port, th, buffer_size=1024):
             multiplexed_results.append([_id, res])
             accepted_rcv += 1
     s.close()
-    sorted(multiplexed_results, key=lambda l: int(l[0].rstrip(',')))
+    multiplexed_results = sorted(multiplexed_results, key=lambda x: x[0])
     return multiplexed_results
 
 
