@@ -15,6 +15,9 @@ PyPortPlexed very simply creates thread like objects that return results via por
 to the n, that can be easily and simply placed directly into a variable made ready to
 use with just three lines of code in a Program that imports PyPortPlexed.
 
+Essentially PyPortPlexed spawns N I/O devices as software that process in parralel
+and communicate via ports. Instructions in, Results out.
+
 Current versions are barebones and would potentially need sanitization depending
 on requirements.
 
