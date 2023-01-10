@@ -49,5 +49,7 @@ while con_rcv != 'terminate':
                     s = socket.socket()
                     host = socket.gethostname()
                     s.connect((host, port_1))
+
+                    """ Tag result with port and send it home """
                     s.send(bytes(str(port) + ' ' + str(ev), encoding='utf-8'))
 s.close()
