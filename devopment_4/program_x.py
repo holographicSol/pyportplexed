@@ -17,12 +17,12 @@ print('\nStarting Program X: Using PyPortPlexed to compute...')
 ports = pyportplexed.start(start_port, n_threads, results_port, buffer_size=1024)
 
 """ 2. Connect to daemonic processes """
-t0 = time.perf_counter()
 connections = pyportplexed.connect(ports)
 
 """ 3. Send something for PyPortPlexed to compute """
 data = ['1024**100000', '1024**100000', '1024**100000', '1024**100000',
         '1024**100000', '1024**100000', '1024**100000', '1024**100000']
+t0 = time.perf_counter()
 pyportplexed.send(connections, data=data)
 
 """ 4. Wait for the results to come in from PyPortPlexed """
