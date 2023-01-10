@@ -1,8 +1,5 @@
 """ Written by Benjamin Jack Cullen
-Intention: This module (to be) distributes workloads to n spawned subprocesses and waits for values to be
-           returned.
-Summary: Multiplex via ports.
-Example program using PyPortPlexed modules.
+Intention: Example program using PyPortPlex.
 """
 import time
 import pyportplexed
