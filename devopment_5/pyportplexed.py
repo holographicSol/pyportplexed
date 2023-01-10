@@ -13,7 +13,7 @@ info.dwFlags = 1
 info.wShowWindow = 0
 
 
-def start(port_start, end, results_port, buffer_size=1024):
+def spawn(port_start, end, results_port, buffer_size=1024):
     """ Starts n processes and give them a call back port number """
     ports = []
     PyPortPlexCommand = 'python ./pyportplexed_daemon.py '
@@ -24,7 +24,7 @@ def start(port_start, end, results_port, buffer_size=1024):
     return ports
 
 
-def connect(ports):
+def commune(ports):
     """ Initiate socket(s) and connect socket(s) to thread(s) (subprocess(s)) """
     socks = []
     for port in ports:
@@ -35,7 +35,7 @@ def connect(ports):
     return socks
 
 
-def send(connections, data):
+def interface(connections, data):
     """ Send to thread(s) (subprocess(s)) """
     i = 0
     for connection in connections:
@@ -43,7 +43,7 @@ def send(connections, data):
         i += 1
 
 
-def results(port, th, buffer_size=1024):
+def consequences(port, th, buffer_size=1024):
     """ Receive the result(s) back from the thread(s) (subprocess(s)) """
     multiplexed_results = []
     s = socket.socket()
@@ -72,4 +72,4 @@ def destroy_daemons(connections):
     data = []
     for connection in connections:
         data.append('terminate')
-    send(connections, data)
+    interface(connections, data)
