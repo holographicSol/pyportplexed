@@ -37,8 +37,17 @@ def connect(ports):
 
 def send(connections, data):
     """ Initiate socket(s) and connect socket(s) to thread(s) (subprocess(s)) """
+    i = 0
     for connection in connections:
-        connection.send(bytes(data, encoding='utf-8'))
+        connection.send(bytes(str(data[i].strip()), encoding='utf-8'))
+        i += 1
+
+
+def destroy_daemons(connections):
+    data = []
+    for connection in connections:
+        data.append('terminate')
+    send(connections, data)
 
 
 def results(port, th, buffer_size=1024):

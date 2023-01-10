@@ -13,33 +13,36 @@ n_threads = 8
 
 print('\nStarting Program X: Using PyPortPlexed to compute...')
 
-""" Start n_threads processes with args """
+""" 1. Start daemonic processes with args """
 ports = th.start(start_port, n_threads, results_port, buffer_size=1024)
 
-""" Connect to n_threads processes and give them a workload """
+""" 2. Connect to daemonic processes """
 t0 = time.perf_counter()
 connections = th.connect(ports)
 
-""" Send something for PyPortPlexed to compute """
-th.send(connections, '1024**100000')
+""" 3. Send something for PyPortPlexed (daemonic processes) to compute """
+data = ['1024**100000', '1024**100000', '1024**100000', '1024**100000',
+        '1024**100000', '1024**100000', '1024**100000', '1024**100000']
+th.send(connections, data=data)
 
-""" Wait for the results to come in from n_threads ports """
+""" 4. Wait for the results to come in from PyPortPlexed """
 results = th.results(results_port, n_threads, buffer_size=1024)
 print('Time taken:', time.perf_counter() - t0)
 print('Items in results:', len(results))
 print()
 
-""" Send more workload(s) to n daemonic process(s) """
+""" Repeat. Send more workload(s) to PyPortPlexed """
 print('Sending another workload for PyPortPlexed to compute...')
 t0 = time.perf_counter()
-th.send(connections, '1024**100000')
+th.send(connections, data=data)
 second_results = th.results(results_port, n_threads, buffer_size=1024)
 print('Time taken:', time.perf_counter() - t0)
 print('Items in results:', len(second_results))
 print()
 
 """ Destroy the daemonic process(s) when done """
-th.send(connections, 'terminate')
+th.destroy_daemons(connections)
+
 
 """
 (8 operations: 1024**100000)
