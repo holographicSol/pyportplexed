@@ -11,10 +11,10 @@ port_1 = int(sys.argv[2])
 buffer_size = int(sys.argv[3])
 
 s = socket.socket()
-host_ip = s.getsockname()[0]
 host = socket.gethostname()
 s.bind((host, port))
 s.listen(3)
+host_ip = s.getsockname()[0]
 
 """ Accept incoming connection """
 c, addr = s.accept()
