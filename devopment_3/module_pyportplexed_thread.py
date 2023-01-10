@@ -50,5 +50,4 @@ while con_rcv != 'terminate':
                     host = socket.gethostname()
                     s.connect((host, port_1))
                     s.send(bytes(str(ev), encoding='utf-8'))
-    time.sleep(1)
 s.close()
