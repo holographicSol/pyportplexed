@@ -36,7 +36,7 @@ def connect(ports):
 
 
 def send(connections, data):
-    """ Initiate socket(s) and connect socket(s) to thread(s) (subprocess(s)) """
+    """ Send to thread(s) (subprocess(s)) """
     i = 0
     for connection in connections:
         connection.send(bytes(str(data[i].strip()), encoding='utf-8'))
