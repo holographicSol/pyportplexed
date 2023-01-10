@@ -16,4 +16,4 @@ A working knwoledge of eval() is required. eval() is extremely powerful, please 
 with caution.
 
 Please understand thoroughly the implications and infinite use cases of eval()
-before handing arguments to PyPortPlex.
+before handing arguments to PyPortPlexed.
