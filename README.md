@@ -2,12 +2,6 @@
 
 In early development.
 
-Multiplex via ports using subprocess(s) to the n.
-
-Please be aware the for flexibility during development phase, the pyportplex threads
-accept a call to eval(). This is extremely powerful so please use caution.
-
-
 If you left Python for a while to find threads in another language you may come
 back home.
 
@@ -18,6 +12,8 @@ use with just three lines of code in a Program that imports PyPortPlexed.
 Essentially PyPortPlexed spawns n daemonic I/O devices that process in parralel
 and communicate via ports. Instructions in, Results out.
 
-Please also understand thoroughly the implications and infinite use cases of eval()
-before handing and arguments to PyPortPlex, because currently eval() is implemented
-for flexibility while developing. 
+A working knwoledge of eval() is required. eval() is extremely powerful, please use
+with caution.
+
+Please understand thoroughly the implications and infinite use cases of eval()
+before handing and arguments to PyPortPlex.
