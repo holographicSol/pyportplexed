@@ -18,8 +18,6 @@ use with just three lines of code in a Program that imports PyPortPlexed.
 Essentially PyPortPlexed spawns N I/O devices as software that process in parralel
 and communicate via ports. Instructions in, Results out.
 
-Designed for even/(+-) workloads.
-
 Current versions are barebones and would potentially need sanitization depending
 on requirements.
 
