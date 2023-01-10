@@ -34,16 +34,16 @@ while con_rcv != 'terminate':
         if host_ip == addr[0]:
 
             """ Decode the incoming message """
-            con_rcv = bytes(c.recv(buffer_size)).decode('utf8')
+            invocation = bytes(c.recv(buffer_size)).decode('utf8')
 
             """ Self destruct """
-            if con_rcv != '':
-                if con_rcv == 'terminate':
+            if invocation != '':
+                if invocation == 'terminate':
                     break
 
                 else:
                     """ Do some work, in this example eval() is used statically (test purposes only) CAUTION. """
-                    ev = eval(con_rcv)
+                    ev = eval(invocation)
 
                     """ Send the result back to the main program (note: final operation is as client) """
                     s = socket.socket()
