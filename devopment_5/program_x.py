@@ -10,6 +10,8 @@ spawn_port = 55555
 results_port = 12345
 threaded_results = []
 threaded_data = []
+results_a_threaded_example_1_A = []
+threaded_data_a_threaded_example_1_A = []
 
 
 def simple_example_0():
@@ -138,7 +140,7 @@ def a_threaded_example_0_A():
     """
     global threaded_results, threaded_data
 
-    n_threads = 8
+    n_threads = 2
     ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024)
     communions = pyportplexed.commune(ports)
     pyportplexed.interface(communions, data=threaded_data)
@@ -156,8 +158,8 @@ def a_threaded_example_0_B():
     print('Starting Program X: Using PyPortPlexed to compute...')
 
     """ Set some data accessible for our function above (a_threaded_example_0_A) """
-    threaded_data = ['1024**100000', '1024**100000', '1024**100000', '1024**100000',
-                     '1024**100000', '1024**100000', '1024**100000', '1024**100000']
+    threaded_data = ['subprocess.getoutput("powershell ping 8.8.8.8")',
+                     'subprocess.getoutput("powershell ping 9.9.9.9")']
 
     """ Start the above function (a_threaded_example_0_A) on a thread """
     thread = Thread(target=a_threaded_example_0_A)
@@ -173,12 +175,48 @@ def a_threaded_example_0_B():
     print('')
 
 
+def a_threaded_example_1_A():
+    """ Provide something for PyPortPlexed to compute but this time we make n_threads variable to size of input data.
+    """
+    global results_a_threaded_example_1_A, threaded_data_a_threaded_example_1_A
+
+    n_threads_a_threaded_example_1_A = int(len(threaded_data_a_threaded_example_1_A))
+    ports = pyportplexed.spawn(spawn_port, n_threads_a_threaded_example_1_A, results_port, buffer_size=1024)
+    communions = pyportplexed.commune(ports)
+    pyportplexed.interface(communions, data=threaded_data_a_threaded_example_1_A)
+    results_a_threaded_example_1_A = pyportplexed.results(results_port, n_threads_a_threaded_example_1_A, buffer_size=1024)
+    pyportplexed.destroy_daemons(communions)
+
+
+def a_threaded_example_1_B():
+    """ Business as usual but with threading.
+    The same thing can be achieved in infinite ways, like timers or QThreads for example,
+    and we implement PyPortPlexed to compute and save time as before but this time we let Program X set n_threads
+    according to the length of data so that we don't have to manually specify n_threads for each operation containing
+    different data quantities.
+    """
+    global results_a_threaded_example_1_A, threaded_data_a_threaded_example_1_A
+
+    print('Starting Program X: Using PyPortPlexed to compute...')
+
+    threaded_data_a_threaded_example_1_A = ['10**1', '10**2', '10**3', '10**4']
+    thread = Thread(target=a_threaded_example_1_A)
+    thread.start()
+    i = 0
+    while not results_a_threaded_example_1_A:
+        time.sleep(1)
+        i += 1
+        print('waiting for PyPortPlexed (super multi-tasking):', i, 'seconds')
+    print('Items in results:', len(results_a_threaded_example_1_A))
+    print('')
+
+
 # uncomment to test
 # simple_example_0()
 # simple_example_1()
 # simple_example_2()
 # simple_example_3()
-a_threaded_example_0_B()
+a_threaded_example_1_B()
 
 """
 (8 operations: 1024**100000)
