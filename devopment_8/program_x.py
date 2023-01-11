@@ -304,6 +304,9 @@ def restricting_the_daemon():
     # uncomment to test restricted names
     # data = ['subprocess.getoutput("powershell psexec -w C:/ -i -s cmd")']
 
+    # uncomment to test restricted names: daemon imports a non currently imported module and uses it.
+    # data = ['"__import__('subprocess').getoutput('powershell psexec -w C:/ -i -s cmd')", {}, {}']
+
     n_threads = int(len(data))
 
     """ 1. spawn daemonic processes with args """
