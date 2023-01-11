@@ -10,6 +10,9 @@ results_port = 12345
 def simple_example(data=[]):
     """ Same as example_0 but this time demonstrating how much can be done in just a few lines before all
     results get slam-dunked back into our results variable from any logical number of daemons. Clean.
+    Note: In this example len(data) is eight so bear in mind PyPortPlexed will spawn 8 daemons.
+          Keep this in mind when implementing PyPortPlexed. You may wish to divide workloads among the daemons
+          in parts.
     """
 
     communions = pyportplexed.commune(pyportplexed.spawn(spawn_port, int(len(data)), results_port, buffer_size=1024))
