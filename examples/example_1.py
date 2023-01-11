@@ -9,7 +9,7 @@ results_port = 12345
 
 def simple_example(data=[]):
     """ Same as example_0 but this time demonstrating how much can be done in just a few lines before all
-    results get slam-dunked back into our results variable from any logical number of daemons.
+    results get slam-dunked back into our results variable from any logical number of daemons. Clean.
     """
 
     communions = pyportplexed.commune(pyportplexed.spawn(spawn_port, int(len(data)), results_port, buffer_size=1024))
