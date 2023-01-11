@@ -79,8 +79,9 @@ while con_rcv != 'terminate':
                     break
 
                 else:
-                    """ Do some work, in this example eval() is used statically (test purposes only) CAUTION. """
-                    # todo: in this version, restrict eval()s access to namespace
+                    """ Do some work, in this example eval() is used statically (test purposes only) CAUTION.
+                    Restrict eval()s access to namespaces.
+                    """
                     ev = eval_expression(invocation)
 
                     """ Send the result back to the main program (note: final operation is as client) """

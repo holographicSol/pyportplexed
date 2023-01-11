@@ -327,7 +327,7 @@ def restricting_the_daemon():
 # simple_example_0()
 
 # Example: Simple math across eight daemons.
-# simple_example_1()
+simple_example_1()
 
 # Example: Simple math across eight daemons kept alive for more simple math.
 # simple_example_2()
@@ -345,7 +345,7 @@ def restricting_the_daemon():
 # a_threaded_example_2_B()
 
 # Example: Restricting the daemon.
-restricting_the_daemon()
+# restricting_the_daemon()
 
 """
 (8 operations: 1024**100000)
