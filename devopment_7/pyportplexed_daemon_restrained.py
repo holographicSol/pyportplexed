@@ -20,6 +20,7 @@ s.listen()
 
 def eval_expression(input_string):
     # Create a dictionary containing the names that you want to use with eval().
+    # May need further restricting. check: id, isinstance, iter
     allowed_names = {"abs": abs,
                      "all": all,
                      "any": any,
@@ -55,6 +56,10 @@ def eval_expression(input_string):
     return eval(code, {"__builtins__": {}}, allowed_names)
 
 
+def _call_eval(_invocation):
+    return eval_expression(_invocation)
+
+
 """ Create a reusable I/O device in software that communicates over ports """
 c = None
 con_rcv = ''
@@ -82,7 +87,7 @@ while con_rcv != 'terminate':
                     """ Do some work, in this example eval() is used statically (test purposes only) CAUTION.
                     Restrict eval()s access to namespaces.
                     """
-                    ev = eval_expression(invocation)
+                    ev = _call_eval(invocation)
 
                     """ Send the result back to the main program (note: final operation is as client) """
                     s = socket.socket()
