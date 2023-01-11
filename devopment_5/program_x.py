@@ -127,33 +127,6 @@ def simple_example_3():
     pyportplexed.destroy_daemons(communions)
 
 
-def simple_example_4():
-    """ Provide PyPortPlexed different data to compute while doing something else.
-    """
-
-    n_threads = 2
-
-    """ 1. spawn daemonic processes with args """
-    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024)
-
-    """ 2. commune with daemonic processes """
-    communions = pyportplexed.commune(ports)
-
-    data = ['subprocess.getoutput("powershell ping 8.8.8.8")',
-            'subprocess.getoutput("powershell ping 9.9.9.9")']
-
-    """ Operation """
-    print('Starting Program X: Using PyPortPlexed to compute...')
-    t0 = time.perf_counter()
-    pyportplexed.interface(communions, data=data)
-    results = pyportplexed.results(results_port, n_threads, buffer_size=1024)
-    print('Time taken:', time.perf_counter() - t0)
-    print('Items in results:', len(results))
-
-    """ Destroy the daemonic process(s) when done """
-    pyportplexed.destroy_daemons(communions)
-
-
 # uncomment to test
 simple_example_0()
 # simple_example_1()
