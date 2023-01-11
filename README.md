@@ -12,7 +12,7 @@ PyPortPlexed very simply creates thread like objects that return results via por
 to the n, that can be easily and simply placed directly into a variable made ready to
 use with just three lines of code in a Program that imports PyPortPlexed.
 
-A working knwoledge of eval() is required. eval() is extremely powerful, please use
+A working knowledge of eval() is required. eval() is extremely powerful, please use
 with caution.
 
 Please understand thoroughly the implications and infinite use cases of eval()
@@ -25,4 +25,4 @@ Any daemons spawned should be almost constantly in use otherwise destroy them if
 you will not be using them for even around a second. Then make more when you need
 them again.
 
-The daemons are networked I/O devices with infiite power thanks and due to eval().
+The daemons are networked I/O devices with infinite power thanks and due to eval().
