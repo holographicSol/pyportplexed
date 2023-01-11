@@ -18,10 +18,10 @@ def simple_example(data=[]):
 
     n_threads = int(len(data))
 
-    """ 1. spawn daemonic processes with args """
+    """ 1. Spawn daemonic processes with args """
     ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024)
 
-    """ 2. commune with daemonic processes """
+    """ 2. Commune with daemonic processes """
     communions = pyportplexed.commune(ports)
 
     print('Starting Program X: Using PyPortPlexed to compute...')
