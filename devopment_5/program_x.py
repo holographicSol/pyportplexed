@@ -3,9 +3,13 @@ Intention: Example program using PyPortPlexed.
 """
 import time
 import pyportplexed
+from threading import Thread
+from time import sleep
 
 spawn_port = 55555
 results_port = 12345
+threaded_results = []
+threaded_data = []
 
 
 def simple_example_0():
@@ -127,11 +131,52 @@ def simple_example_3():
     pyportplexed.destroy_daemons(communions)
 
 
+def a_threaded_example_0_A(data=[]):
+    """ Provide something for PyPortPlexed to compute but this time we run this
+    function using Python's built in threading so that we have our hands free while
+    we PyPortPlex things.
+    """
+    global threaded_results, threaded_data
+
+    n_threads = 8
+    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024)
+    communions = pyportplexed.commune(ports)
+    pyportplexed.interface(communions, data=threaded_data)
+    threaded_results = pyportplexed.results(results_port, n_threads, buffer_size=1024)
+    pyportplexed.destroy_daemons(communions)
+
+
+def a_threaded_example_0_B():
+    """ Business as usual but with threading.
+    """
+    global threaded_results, threaded_data
+    print('Starting Program X: Using PyPortPlexed to compute...')
+
+    """ Set some data accessible for our function above (a_threaded_example_0_A) """
+    threaded_data = ['1024**100000', '1024**100000', '1024**100000', '1024**100000',
+                     '1024**100000', '1024**100000', '1024**100000', '1024**100000']
+
+    """ Start the above function (a_threaded_example_0_A) on a thread """
+    thread = Thread(target=a_threaded_example_0_A)
+    thread.start()
+
+    """ Do other things while PyPortPlexed does n things in parallel! """
+    i = 0
+    while not threaded_results:
+        print('waiting for PyPortPlexed (super multi-tasking):', i, 'seconds')
+        time.sleep(1)
+        i += 1
+    print('Items in results:', len(threaded_results))
+    print('')
+
+
 # uncomment to test
-simple_example_0()
+# simple_example_0()
 # simple_example_1()
 # simple_example_2()
 # simple_example_3()
+a_threaded_example_0_B()
+
 """
 (8 operations: 1024**100000)
 my pyportplexed (python -OO program_x.py):
