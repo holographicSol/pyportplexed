@@ -12,6 +12,10 @@ threaded_results = []
 threaded_data = []
 results_a_threaded_example_1_A = []
 threaded_data_a_threaded_example_1_A = []
+results_a_threaded_example_2_A = []
+threaded_data_a_threaded_example_2_A = []
+results_a_threaded_example_2_C = []
+threaded_data_a_threaded_example_2_C = []
 
 
 def simple_example_0():
@@ -180,11 +184,11 @@ def a_threaded_example_1_A():
     """
     global results_a_threaded_example_1_A, threaded_data_a_threaded_example_1_A
 
-    n_threads_a_threaded_example_1_A = int(len(threaded_data_a_threaded_example_1_A))
-    ports = pyportplexed.spawn(spawn_port, n_threads_a_threaded_example_1_A, results_port, buffer_size=1024)
+    n_threads = int(len(threaded_data_a_threaded_example_1_A))
+    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024)
     communions = pyportplexed.commune(ports)
     pyportplexed.interface(communions, data=threaded_data_a_threaded_example_1_A)
-    results_a_threaded_example_1_A = pyportplexed.results(results_port, n_threads_a_threaded_example_1_A, buffer_size=1024)
+    results_a_threaded_example_1_A = pyportplexed.results(results_port, n_threads, buffer_size=1024)
     pyportplexed.destroy_daemons(communions)
 
 
@@ -199,7 +203,7 @@ def a_threaded_example_1_B():
 
     print('Starting Program X: Using PyPortPlexed to compute...')
 
-    threaded_data_a_threaded_example_1_A = ['10**1', '10**2', '10**3', '10**4']
+    threaded_data_a_threaded_example_1_A = ['10**1', '10**2', '10**3', '10**4', '10**5', '10**6', '10**7']
     thread = Thread(target=a_threaded_example_1_A)
     thread.start()
     i = 0
@@ -211,12 +215,80 @@ def a_threaded_example_1_B():
     print('')
 
 
+def a_threaded_example_2_A():
+    """ Provide something for PyPortPlexed to compute.
+    """
+    global results_a_threaded_example_2_A, threaded_data_a_threaded_example_2_A
+
+    spawn_port_0 = 55555
+    results_port_0 = 12345
+
+    n_threads = int(len(threaded_data_a_threaded_example_2_A))
+    ports = pyportplexed.spawn(spawn_port_0, n_threads, results_port_0, buffer_size=1024)
+    communions = pyportplexed.commune(ports)
+    pyportplexed.interface(communions, data=threaded_data_a_threaded_example_2_A)
+    results_a_threaded_example_2_A = pyportplexed.results(results_port_0, n_threads, buffer_size=1024)
+    pyportplexed.destroy_daemons(communions)
+
+
+def a_threaded_example_2_C():
+    """ Provide something for PyPortPlexed to compute.
+    """
+    global results_a_threaded_example_2_C, threaded_data_a_threaded_example_2_C
+
+    spawn_port_1 = 44444
+    results_port_1 = 22222
+
+    n_threads = int(len(threaded_data_a_threaded_example_2_C))
+    ports = pyportplexed.spawn(spawn_port_1, n_threads, results_port_1, buffer_size=1024)
+    communions = pyportplexed.commune(ports)
+    pyportplexed.interface(communions, data=threaded_data_a_threaded_example_2_C)
+    results_a_threaded_example_2_C = pyportplexed.results(results_port_1, n_threads, buffer_size=1024)
+    pyportplexed.destroy_daemons(communions)
+
+
+def a_threaded_example_2_B():
+    """ Business as usual but with threading.
+    This time lets spawn two PyPortPlexed operations that we can use independently processing different things and
+    again implement threading to keep our hands free while PyPortPlexed parallel computes.
+    """
+    global results_a_threaded_example_2_A, threaded_data_a_threaded_example_2_A
+    global results_a_threaded_example_2_C, threaded_data_a_threaded_example_2_C
+
+    print('Starting Program X: Using PyPortPlexed to compute...')
+
+    threaded_data_a_threaded_example_2_A = ['10**10', '10**20', '10**30', '10**40']
+    thread = Thread(target=a_threaded_example_2_A)
+    thread.start()
+
+    threaded_data_a_threaded_example_2_C = ['10**1', '10**2', '10**3', '10**4']
+    thread = Thread(target=a_threaded_example_2_C)
+    thread.start()
+
+    i = 0
+    allow_readout_0 = True
+    allow_readout_1 = True
+    while i < 2:
+        if results_a_threaded_example_2_A and allow_readout_0 is True:
+            allow_readout_0 = False
+            print('Items in first results:', len(results_a_threaded_example_2_A))
+            i += 1
+        if results_a_threaded_example_2_C and allow_readout_1 is True:
+            allow_readout_1 = False
+            print('Items in second results:', len(results_a_threaded_example_2_C))
+            i += 1
+    print('completed.')
+    print('')
+
+
 # uncomment to test
 # simple_example_0()
 # simple_example_1()
 # simple_example_2()
 # simple_example_3()
-a_threaded_example_1_B()
+# a_threaded_example_0_B()
+# a_threaded_example_1_B()
+a_threaded_example_2_B()
 
 """
 (8 operations: 1024**100000)
