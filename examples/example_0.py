@@ -9,7 +9,12 @@ results_port = 12345
 
 
 def simple_example(data=[]):
-    """ Provide something for PyPortPlexed to compute and then destroy the daemons and return results."""
+    """ Provide something for PyPortPlexed to compute and then destroy the daemons and return results.
+    
+    Note: For this example to work, ports 55555 to 55558 must be free because len(data) is 4, which means PyPortPlexed
+          will spawn 4 daemons on ports 55555 to 55558.
+          Bear this strongly in mind when using PyPortPlexed.
+    """
 
     n_threads = int(len(data))
 
