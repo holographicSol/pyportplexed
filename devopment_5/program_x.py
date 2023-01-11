@@ -131,7 +131,7 @@ def simple_example_3():
     pyportplexed.destroy_daemons(communions)
 
 
-def a_threaded_example_0_A(data=[]):
+def a_threaded_example_0_A():
     """ Provide something for PyPortPlexed to compute but this time we run this
     function using Python's built in threading so that we have our hands free while
     we PyPortPlex things.
@@ -148,8 +148,11 @@ def a_threaded_example_0_A(data=[]):
 
 def a_threaded_example_0_B():
     """ Business as usual but with threading.
+    The same thing can be achieved in infinite ways, like timers or QThreads for example,
+    and we implement PyPortPlexed to compute and save time as before.
     """
     global threaded_results, threaded_data
+
     print('Starting Program X: Using PyPortPlexed to compute...')
 
     """ Set some data accessible for our function above (a_threaded_example_0_A) """
@@ -163,9 +166,9 @@ def a_threaded_example_0_B():
     """ Do other things while PyPortPlexed does n things in parallel! """
     i = 0
     while not threaded_results:
-        print('waiting for PyPortPlexed (super multi-tasking):', i, 'seconds')
         time.sleep(1)
         i += 1
+        print('waiting for PyPortPlexed (super multi-tasking):', i, 'seconds')
     print('Items in results:', len(threaded_results))
     print('')
 
