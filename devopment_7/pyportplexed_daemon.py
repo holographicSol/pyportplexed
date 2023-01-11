@@ -43,7 +43,11 @@ while con_rcv != 'terminate':
 
                 else:
                     """ Do some work, in this example eval() is used statically (test purposes only) CAUTION. """
-                    ev = eval(invocation)
+                    ev = ''
+                    try:
+                        ev = eval(invocation)
+                    except Exception as e:
+                        ev = str(e)
 
                     """ Send the result back to the main program (note: final operation is as client) """
                     s = socket.socket()
