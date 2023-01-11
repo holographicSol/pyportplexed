@@ -87,7 +87,11 @@ while con_rcv != 'terminate':
                     """ Do some work, in this example eval() is used statically (test purposes only) CAUTION.
                     Restrict eval()s access to namespaces.
                     """
-                    ev = _call_eval(invocation)
+                    ev = ''
+                    try:
+                        ev = _call_eval(invocation)
+                    except Exception as e:
+                        ev = str(e)
 
                     """ Send the result back to the main program (note: final operation is as client) """
                     s = socket.socket()

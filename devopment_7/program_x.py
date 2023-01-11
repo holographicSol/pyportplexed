@@ -4,7 +4,6 @@ Intention: Example program using PyPortPlexed.
 import time
 import pyportplexed
 from threading import Thread
-from time import sleep
 
 spawn_port = 55555
 results_port = 12345
@@ -296,10 +295,12 @@ def restricting_the_daemon():
     Restrained variable is False by default. It is up to developers to use a restrained daemon.
     """
 
-    data = ['sum([2,2])',
-            'pow(10, 2)',
-            'len("foobar")',
-            'max([1,2,3,4,5,6,7,8,9])']
+    # data = ['sum([2,2])',
+    #         'pow(10, 2)',
+    #         'len("foobar")',
+    #         'max([1,2,3,4,5,6,7,8,9])']
+
+    data = ['subprocess.getoutput("powershell notepad")']
 
     n_threads = int(len(data))
 
@@ -316,6 +317,7 @@ def restricting_the_daemon():
     results = pyportplexed.results(results_port, n_threads, buffer_size=1024)
     print('Time taken:', time.perf_counter() - t0)
     print('Items in results:', len(results))
+    print('Results:', results)
 
     """ Destroy the daemonic process(s) when done """
     pyportplexed.destroy_daemons(communions)
@@ -327,7 +329,7 @@ def restricting_the_daemon():
 # simple_example_0()
 
 # Example: Simple math across eight daemons.
-simple_example_1()
+# simple_example_1()
 
 # Example: Simple math across eight daemons kept alive for more simple math.
 # simple_example_2()
@@ -345,7 +347,7 @@ simple_example_1()
 # a_threaded_example_2_B()
 
 # Example: Restricting the daemon.
-# restricting_the_daemon()
+restricting_the_daemon()
 
 """
 (8 operations: 1024**100000)
