@@ -9,7 +9,7 @@ consequences_port = 12345
 
 
 def simple_example_0():
-    """ interface something for PyPortPlexed to compute and then destroy the daemons """
+    """ Provide something for PyPortPlexed to compute and then destroy the daemons """
 
     n_threads = 4
 
@@ -21,7 +21,7 @@ def simple_example_0():
 
     data = ['10**1', '10**2', '10**3', '10**4']
 
-    print('spawning Program X: Using PyPortPlexed to compute...')
+    print('Starting Program X: Using PyPortPlexed to compute...')
     t0 = time.perf_counter()
     pyportplexed.interface(communions, data=data)
 
@@ -38,7 +38,7 @@ def simple_example_0():
 
 
 def simple_example_1():
-    """ interface something for PyPortPlexed to compute and then destroy the daemons """
+    """ Provide something for PyPortPlexed to compute and then destroy the daemons """
 
     n_threads = 8
 
@@ -51,7 +51,7 @@ def simple_example_1():
     data = ['1024**100000', '1024**100000', '1024**100000', '1024**100000',
             '1024**100000', '1024**100000', '1024**100000', '1024**100000']
 
-    print('spawning Program X: Using PyPortPlexed to compute...')
+    print('Starting Program X: Using PyPortPlexed to compute...')
     t0 = time.perf_counter()
     pyportplexed.interface(communions, data=data)
 
@@ -65,7 +65,7 @@ def simple_example_1():
 
 
 def simple_example_2():
-    """ interface something for PyPortPlexed to compute then interface
+    """ Provide something for PyPortPlexed to compute then provide
     PyPortPlexed some more data to compute and then destroy the daemons
     """
 
@@ -81,7 +81,7 @@ def simple_example_2():
             '1024**100000', '1024**100000', '1024**100000', '1024**100000']
 
     """ Operation 1. """
-    print('spawning Program X: Using PyPortPlexed to compute...')
+    print('Starting Program X: Using PyPortPlexed to compute...')
     t0 = time.perf_counter()
     pyportplexed.interface(communions, data=data)
     consequences = pyportplexed.consequences(consequences_port, n_threads, buffer_size=1024)
@@ -101,7 +101,7 @@ def simple_example_2():
 
 
 def simple_example_3():
-    """ interface PyPortPlexed different data to compute
+    """ Provide PyPortPlexed different data to compute
     """
 
     n_threads = 2
@@ -116,7 +116,34 @@ def simple_example_3():
             'subprocess.getoutput("powershell ping 9.9.9.9")']
 
     """ Operation """
-    print('spawning Program X: Using PyPortPlexed to compute...')
+    print('Starting Program X: Using PyPortPlexed to compute...')
+    t0 = time.perf_counter()
+    pyportplexed.interface(communions, data=data)
+    consequences = pyportplexed.consequences(consequences_port, n_threads, buffer_size=1024)
+    print('Time taken:', time.perf_counter() - t0)
+    print('Items in consequences:', len(consequences))
+
+    """ Destroy the daemonic process(s) when done """
+    pyportplexed.destroy_daemons(communions)
+
+
+def simple_example_4():
+    """ Provide PyPortPlexed different data to compute while doing something else.
+    """
+
+    n_threads = 2
+
+    """ 1. spawn daemonic processes with args """
+    ports = pyportplexed.spawn(spawn_port, n_threads, consequences_port, buffer_size=1024)
+
+    """ 2. commune with daemonic processes """
+    communions = pyportplexed.commune(ports)
+
+    data = ['subprocess.getoutput("powershell ping 8.8.8.8")',
+            'subprocess.getoutput("powershell ping 9.9.9.9")']
+
+    """ Operation """
+    print('Starting Program X: Using PyPortPlexed to compute...')
     t0 = time.perf_counter()
     pyportplexed.interface(communions, data=data)
     consequences = pyportplexed.consequences(consequences_port, n_threads, buffer_size=1024)
