@@ -307,7 +307,7 @@ def restricting_the_daemon():
     n_threads = int(len(data))
 
     """ 1. spawn daemonic processes with args """
-    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024, restrained=True)
+    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024, restrained=False)
 
     """ 2. commune with daemonic processes """
     communions = pyportplexed.commune(ports)

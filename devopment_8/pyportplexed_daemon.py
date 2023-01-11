@@ -34,42 +34,45 @@ def _send(_port, _port_1, _ev):
             _send(_port, _ev)
 
 
-""" Setup socket according to input arguments """
-s = socket.socket()
-host = socket.gethostname()
-s.bind((host, port))
-s.listen()
+if str(port).isdigit():
+    if str(port_1).isdigit():
+        if str(buffer_size).isdigit():
+            """ Setup socket according to input arguments """
+            s = socket.socket()
+            host = socket.gethostname()
+            s.bind((host, port))
+            s.listen()
 
-""" Create a reusable I/O device in software that communicates over ports """
-c = None
-con_rcv = ''
-while con_rcv != 'terminate':
-    con_rcv = ''
-    if c is None:
+            """ Create a reusable I/O device in software that communicates over ports """
+            c = None
+            con_rcv = ''
+            while con_rcv != 'terminate':
+                con_rcv = ''
+                if c is None:
 
-        """ Accept incoming connection """
-        c, addr = s.accept()
-    else:
-        host_ip = s.getsockname()[0]
-
-        """ Allow receive if incoming addr[0] (IP) == socket.getsockname()[0] """
-        if host_ip == addr[0]:
-
-            """ Decode the incoming message """
-            invocation = bytes(c.recv(buffer_size)).decode('utf8')
-
-            """ Self destruct """
-            if invocation != '':
-                if invocation == 'terminate':
-                    break
-
+                    """ Accept incoming connection """
+                    c, addr = s.accept()
                 else:
-                    """ Do some work, in this example eval() is used statically (test purposes only) CAUTION. """
-                    ev = ''
-                    try:
-                        ev = eval(invocation)
-                    except Exception as e:
-                        ev = str(e)
+                    host_ip = s.getsockname()[0]
 
-                    _send(port, port_1, ev)
-s.close()
+                    """ Allow receive if incoming addr[0] (IP) == socket.getsockname()[0] """
+                    if host_ip == addr[0]:
+
+                        """ Decode the incoming message """
+                        invocation = bytes(c.recv(buffer_size)).decode('utf8')
+
+                        """ Self destruct """
+                        if invocation != '':
+                            if invocation == 'terminate':
+                                break
+
+                            else:
+                                """ Do some work, in this example eval() is used statically (test purposes only) CAUTION. """
+                                ev = ''
+                                try:
+                                    ev = eval(invocation)
+                                except Exception as e:
+                                    ev = str(e)
+
+                                _send(port, port_1, ev)
+            s.close()
