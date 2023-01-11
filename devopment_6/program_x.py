@@ -281,14 +281,28 @@ def a_threaded_example_2_B():
     print('')
 
 
-# uncomment to test
+# Uncomment to try some infinite possibilities of using PyPortPlexed.
+
+# Example: Simple math across four daemons.
 # simple_example_0()
+
+# Example: Simple math across eight daemons.
 # simple_example_1()
+
+# Example: Simple math across eight daemons kept alive for more simple math.
 # simple_example_2()
-# simple_example_3()
+
+# Example: Subprocess a subprocess. Two daemons ping in half the time.
+simple_example_3()
+
+# Example: Threaded ping. Two daemons ping in half the time while program has its hands free.
 # a_threaded_example_0_B()
+
+# Example: Dynamic n_thread pertains to list length.
 # a_threaded_example_1_B()
-a_threaded_example_2_B()
+
+# Example: Dual PyPortPlexed.
+# a_threaded_example_2_B()
 
 """
 (8 operations: 1024**100000)
