@@ -30,3 +30,6 @@ The daemons are networked I/O devices with infinite power thanks and due to eval
 PLEASE: Read through and run the examples so that you can understand everything
 current about PyPortPlexed before use. Once some fundamentals are understood,
 it is then safe and very simple to use PyPortPlexed.
+
+Not yet unlocked.
+End Game: PyPortPlexed is for distributed network compute.
