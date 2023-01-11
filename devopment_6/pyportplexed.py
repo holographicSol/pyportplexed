@@ -6,17 +6,19 @@ Summary: Multiplex via ports.
 import socket
 import subprocess
 
-
 """ Setup subprocess startupinfo argument to be daemonic """
 info = subprocess.STARTUPINFO()
 info.dwFlags = 1
 info.wShowWindow = 0
 
 
-def spawn(port_start, end, results_port, buffer_size=1024):
+def spawn(port_start, end, results_port, buffer_size=1024, restrained=False):
     """ Starts n process(s) each with their own port and give each of them a single call back port number """
     ports = []
-    PyPortPlexCommand = 'python ./pyportplexed_daemon.py '
+    if restrained is False:
+        PyPortPlexCommand = 'python ./pyportplexed_daemon.py '
+    elif restrained is True:
+        PyPortPlexCommand = 'python ./pyportplexed_daemon_restrained.py '
     for n in range(port_start, port_start+end):
         summon = PyPortPlexCommand + str(n) + ' ' + str(results_port) + ' ' + str(buffer_size)
         ports.append(n)

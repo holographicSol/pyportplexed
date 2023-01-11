@@ -281,6 +281,46 @@ def a_threaded_example_2_B():
     print('')
 
 
+def restricting_the_daemon():
+    """ PyPortPlexed has different daemons that can be leveraged however some are more powerful than others.
+
+    Choose carefully which daemon you wish to use and ultimately compile with.
+
+    Setting restrained=True will force PyPortPlexed to run a restrained version of its daemon that should have
+    very restricted access to namespaces.
+
+    If you don't need it then do not use it. Make restrained=True to use a less powerful daemon.
+
+    A full list of allowed names can be found in pyportplexed_daemon_restrained.py allowed_names dictionary.
+
+    Restrained variable is False by default. It is up to developers to use a restrained daemon.
+    """
+
+    data = ['sum([2,2])',
+            'pow(10, 2)',
+            'len("foobar")',
+            'max([1,2,3,4,5,6,7,8,9])']
+
+    n_threads = int(len(data))
+
+    """ 1. spawn daemonic processes with args """
+    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024, restrained=True)
+
+    """ 2. commune with daemonic processes """
+    communions = pyportplexed.commune(ports)
+
+    """ Operation """
+    print('Starting Program X: Using PyPortPlexed to compute...')
+    t0 = time.perf_counter()
+    pyportplexed.interface(communions, data=data)
+    results = pyportplexed.results(results_port, n_threads, buffer_size=1024)
+    print('Time taken:', time.perf_counter() - t0)
+    print('Items in results:', len(results))
+
+    """ Destroy the daemonic process(s) when done """
+    pyportplexed.destroy_daemons(communions)
+
+
 # Uncomment to try some infinite possibilities of using PyPortPlexed.
 
 # Example: Simple math across four daemons.
@@ -293,7 +333,7 @@ def a_threaded_example_2_B():
 # simple_example_2()
 
 # Example: Subprocess a subprocess. Two daemons ping in half the time.
-simple_example_3()
+# simple_example_3()
 
 # Example: Threaded ping. Two daemons ping in half the time while program has its hands free.
 # a_threaded_example_0_B()
@@ -303,6 +343,9 @@ simple_example_3()
 
 # Example: Dual PyPortPlexed.
 # a_threaded_example_2_B()
+
+# Example: Restricting the daemon.
+restricting_the_daemon()
 
 """
 (8 operations: 1024**100000)
