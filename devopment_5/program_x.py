@@ -5,7 +5,7 @@ import time
 import pyportplexed
 
 spawn_port = 55555
-consequences_port = 12345
+results_port = 12345
 
 
 def simple_example_0():
@@ -14,7 +14,7 @@ def simple_example_0():
     n_threads = 4
 
     """ 1. spawn daemonic processes with args """
-    ports = pyportplexed.spawn(spawn_port, n_threads, consequences_port, buffer_size=1024)
+    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024)
 
     """ 2. commune with daemonic processes """
     communions = pyportplexed.commune(ports)
@@ -25,15 +25,15 @@ def simple_example_0():
     t0 = time.perf_counter()
     pyportplexed.interface(communions, data=data)
 
-    """ Wait for the consequences to come in from PyPortPlexed """
-    consequences = pyportplexed.consequences(consequences_port, n_threads, buffer_size=1024)
+    """ Wait for the results to come in from PyPortPlexed """
+    results = pyportplexed.results(results_port, n_threads, buffer_size=1024)
     print('Time taken:', time.perf_counter() - t0)
-    print('Items in consequences:', len(consequences))
+    print('Items in results:', len(results))
 
     """ Destroy the daemonic process(s) when done """
     pyportplexed.destroy_daemons(communions)
 
-    for result in consequences:
+    for result in results:
         print('result _id:', result[0], ' result:', result[1])
 
 
@@ -43,7 +43,7 @@ def simple_example_1():
     n_threads = 8
 
     """ 1. spawn daemonic processes with args """
-    ports = pyportplexed.spawn(spawn_port, n_threads, consequences_port, buffer_size=1024)
+    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024)
 
     """ 2. commune with daemonic processes """
     communions = pyportplexed.commune(ports)
@@ -55,10 +55,10 @@ def simple_example_1():
     t0 = time.perf_counter()
     pyportplexed.interface(communions, data=data)
 
-    """ Wait for the consequences to come in from PyPortPlexed """
-    consequences = pyportplexed.consequences(consequences_port, n_threads, buffer_size=1024)
+    """ Wait for the results to come in from PyPortPlexed """
+    results = pyportplexed.results(results_port, n_threads, buffer_size=1024)
     print('Time taken:', time.perf_counter() - t0)
-    print('Items in consequences:', len(consequences))
+    print('Items in results:', len(results))
 
     """ Destroy the daemonic process(s) when done """
     pyportplexed.destroy_daemons(communions)
@@ -72,7 +72,7 @@ def simple_example_2():
     n_threads = 8
 
     """ 1. spawn daemonic processes with args """
-    ports = pyportplexed.spawn(spawn_port, n_threads, consequences_port, buffer_size=1024)
+    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024)
 
     """ 2. commune with daemonic processes """
     communions = pyportplexed.commune(ports)
@@ -84,17 +84,17 @@ def simple_example_2():
     print('Starting Program X: Using PyPortPlexed to compute...')
     t0 = time.perf_counter()
     pyportplexed.interface(communions, data=data)
-    consequences = pyportplexed.consequences(consequences_port, n_threads, buffer_size=1024)
+    results = pyportplexed.results(results_port, n_threads, buffer_size=1024)
     print('Time taken:', time.perf_counter() - t0)
-    print('Items in consequences:', len(consequences))
+    print('Items in results:', len(results))
 
     """ Operation 2. """
     print('Providing another workload for PyPortPlexed to compute...')
     t0 = time.perf_counter()
     pyportplexed.interface(communions, data=data)
-    second_consequences = pyportplexed.consequences(consequences_port, n_threads, buffer_size=1024)
+    second_results = pyportplexed.results(results_port, n_threads, buffer_size=1024)
     print('Time taken:', time.perf_counter() - t0)
-    print('Items in consequences:', len(second_consequences))
+    print('Items in results:', len(second_results))
 
     """ Destroy the daemonic process(s) when done """
     pyportplexed.destroy_daemons(communions)
@@ -107,7 +107,7 @@ def simple_example_3():
     n_threads = 2
 
     """ 1. spawn daemonic processes with args """
-    ports = pyportplexed.spawn(spawn_port, n_threads, consequences_port, buffer_size=1024)
+    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024)
 
     """ 2. commune with daemonic processes """
     communions = pyportplexed.commune(ports)
@@ -119,9 +119,9 @@ def simple_example_3():
     print('Starting Program X: Using PyPortPlexed to compute...')
     t0 = time.perf_counter()
     pyportplexed.interface(communions, data=data)
-    consequences = pyportplexed.consequences(consequences_port, n_threads, buffer_size=1024)
+    results = pyportplexed.results(results_port, n_threads, buffer_size=1024)
     print('Time taken:', time.perf_counter() - t0)
-    print('Items in consequences:', len(consequences))
+    print('Items in results:', len(results))
 
     """ Destroy the daemonic process(s) when done """
     pyportplexed.destroy_daemons(communions)
@@ -134,7 +134,7 @@ def simple_example_4():
     n_threads = 2
 
     """ 1. spawn daemonic processes with args """
-    ports = pyportplexed.spawn(spawn_port, n_threads, consequences_port, buffer_size=1024)
+    ports = pyportplexed.spawn(spawn_port, n_threads, results_port, buffer_size=1024)
 
     """ 2. commune with daemonic processes """
     communions = pyportplexed.commune(ports)
@@ -146,9 +146,9 @@ def simple_example_4():
     print('Starting Program X: Using PyPortPlexed to compute...')
     t0 = time.perf_counter()
     pyportplexed.interface(communions, data=data)
-    consequences = pyportplexed.consequences(consequences_port, n_threads, buffer_size=1024)
+    results = pyportplexed.results(results_port, n_threads, buffer_size=1024)
     print('Time taken:', time.perf_counter() - t0)
-    print('Items in consequences:', len(consequences))
+    print('Items in results:', len(results))
 
     """ Destroy the daemonic process(s) when done """
     pyportplexed.destroy_daemons(communions)

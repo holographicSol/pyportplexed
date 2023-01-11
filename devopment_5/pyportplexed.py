@@ -43,7 +43,7 @@ def interface(connections, data):
         i += 1
 
 
-def consequences(port, th, buffer_size=1024):
+def results(port, th, buffer_size=1024):
     """ Receive result(s) back from the subprocess(s) """
     multiplexed_results = []
     s = socket.socket()
