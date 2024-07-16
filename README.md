@@ -1,6 +1,6 @@
 # PyPortPlexed
 
-In early development.
+Eval and Exec in the big chair to rule until they will be destroyed.
 
 Essentially PyPortPlexed spawns n daemonic I/O devices that process in parralel
 and communicate via ports. Instructions in, Results out.
