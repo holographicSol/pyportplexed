@@ -26,4 +26,5 @@ it is then safe and very simple to use PyPortPlexed.
 
 Locked: receiving data back from eval and exec is restricted to local host but
 the restriction can be easily removed, unleashing eval and exec to the entire 
-internet for mass distributed compute and control.
+internet for mass distributed compute and control. the restriction to local 
+host is for demonstration purposes.
