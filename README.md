@@ -31,5 +31,7 @@ PLEASE: Read through and run the examples so that you can understand everything
 current about PyPortPlexed before use. Once some fundamentals are understood,
 it is then safe and very simple to use PyPortPlexed.
 
-Not yet unlocked.
-End Game: PyPortPlexed is for distributed network compute.
+Locked: receiving data back from eval and exec is restricted to local host but
+seeing as exec and eval are already roming all too free, the restriction can
+be easily removed, unleashing eval and exec to the entire internet for distributed
+compute.
